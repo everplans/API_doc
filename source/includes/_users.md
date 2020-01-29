@@ -66,3 +66,36 @@ This endpoint invites a single individual user.
 ### HTTP Request
 
 `POST http://everplans.com/api/v1/clients/<SEAT_ID>/invite`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+custom_invite_text | A message you want to send as part of the invitation to the user
+
+
+## Remove a client
+
+```shell
+curl "http://everplans.com/api/v1/clients/<SEAT_ID>"
+  -X DELETE
+  -H "Authorization: token <access_token>"
+```
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 2,
+  "status": "Draft",
+  "user_id": null,
+  "advisor_id": 3,
+  "firm_id": 3
+}
+```
+
+This endpoint removes a single individual user from the organization.
+
+### HTTP Request
+
+`DELETE http://everplans.com/api/v1/clients/<SEAT_ID>`
+
