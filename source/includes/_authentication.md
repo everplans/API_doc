@@ -1,46 +1,73 @@
-# API Key
-To get an API KEY
+# Authentication
+To successfully authenticate, you need
+- an API Secret Key and client ID
+- a user refresh_token
+- an access_token
 
-> To generate an secret, use
+All call to our endpoint unless specified require an access_token
+
+## API Secret
+To get an API Secret and a client ID, please reach out to the Everplans Customer Success team
+
+
+## Refresh token
+You need the API secret key and the client ID to retrieve a refresh_token which you'll use to get an access_token
+
+> To retrieve an refresh_token, use this code:
 
 ```shell
-curl "http://everplans.com/api/v2/oauth/secret/<ORG_ID>"
+# With shell, you can just pass the correct header with each request
+curl "http://everplans.com/api/v2/oauth2/refresh_token" \
+  -d '{
+    "client_id": client ID, 
+    client_secret: secret key"
+  }'
 ```
 
-> The ORG_ID is the id of the organization
-> The above command will return JSON structured like this:
+> Make sure to replace `client_id` and `secret` with your API keys.
+> The above command returns JSON structured like this:
 
 ```json
-{
-  "secret": "the generated secret"
-}
+[
+  {
+   "refresh_token": "your_refresh_token"
+  }
+]
 ```
-To get a secret, use
+
+
+To retrieve an refresh_token, use
 
 ### HTTP Request
 
-`GET https://everplans.com/api/v2/secret/<ORG_ID>`
+`GET https://everplans.com/api/v2/oauth2/refresh_token`
 
 ### Query Parameters
 
 Parameter | Description
 --------- | -----------
-ORG_ID | The ID of the organization.
+client_id | your client id.
+client_secret | your API secret key.
 
-# Authentication
+<aside class="notice">
+You must replace <code>client_id</code> and <code>secret</code> with your personal API keys.
+</aside>
+<aside class="success">
+once you get a refresh_token back, you can then use it to retrieve your access_token
+</aside>
 
-> To authenticate, use this code:
+
+> To retrieve the access_token, use:
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "http://everplans.com/api/v2/oauth/access_token" \
+curl "http://everplans.com/api/v2/oauth2/access_token" \
   -d '{
-    "ORG_ID: organization id, 
-    secret: secret key"
+    "refresh_token: refresh token"
   }'
 ```
 
-> Make sure to replace `ORG_ID` and `secret` with your API keys.
+> Make sure to replace `refresh_token` with the refresh_token you got in the previous step.
 > The above command returns JSON structured like this:
 
 ```json
@@ -56,22 +83,21 @@ To retrieve an access_token, use
 
 ### HTTP Request
 
-`GET https://everplans.com/api/v2/oauth/access_token`
+`GET https://everplans.com/api/v2/oauth2/access_token`
 
 ### Query Parameters
 
 Parameter | Description
 --------- | -----------
-ORG_ID | Your organization id.
-secret | your secret key.
+refresh_token | Your refresh token.
 
 <aside class="notice">
-You must replace <code>api_key</code> and <code>secret_key</code> with your personal API keys.
+You must replace <code>refresh_token</code> with the token you got in the previous step.
 </aside>
 <aside class="success">
-once you get an auth_token back, you're authenticated
+once you get an access_token back, you're authenticated
 </aside>
 
-Everplans expects for the access_token to be included in all API requests to the server in a header that looks like the following:
+Everplans expects for the `access_token` to be included in all API requests to the server in an Authorization header that looks like the following:
 
-`Authorization: token: access_token`
+`Authorization: Token token=access_token`

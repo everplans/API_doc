@@ -9,10 +9,9 @@ toc_footers:
 
 includes:
   - authentication
-  - firms
-  - users
   - everplans
   - errors
+  - user_guide
 
 search: true
 ---
