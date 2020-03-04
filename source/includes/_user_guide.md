@@ -28,26 +28,17 @@ For all subsequent API requests you'll need to set the following two headers.
 * `Content-Type: application/vnd.api+json`
 * `'Authorization: Token token=access_token' ` (be sure to supply the exact access_token you received from the Authentication request)
 
-
-### Uploading the PDF
-Post the following URL with the following headers. Be sure to include the PDF as a binary attachment in the post payload.
-
-* URL: POST  https://my.everplans.com/api/v2/uploads
-* Additional header: `Content-Type: multipart/form-data`
-
+```shell
 For convenience, here is a cURL command:
-```
 curl -X POST \
   https://my.everplans.com/api/v2/uploads \
   -H 'Authorization: Token token=[access_token]' \
   -H 'content-type: multipart/form-data; application/vnd.api+json;' \
   -F file=@PATH_TO_LOCAL_FILE
 ```
-The response will look something like this, be sure to hold on to the `id` of the upload to use below.
+> The response will look something like this, be sure to hold on to the `id` of the upload to use below.
 
-Response:
-
-```
+```json
 {
   "upload": {
     "id": "f1535090-d17d-46e2-beb8-0f2fd51a069d",
@@ -67,22 +58,19 @@ Response:
 }
 ```
 
+### Uploading the PDF
+Post the following URL with the following headers. Be sure to include the PDF as a binary attachment in the post payload.
+
+* URL: POST  https://my.everplans.com/api/v2/uploads
+* Additional header: `Content-Type: multipart/form-data`
+
 
 ### Attaching the PDF and adding meta data
 The everplan is comprised of structured fields in a rich hierarchy. Each `field` of data is called an `element`, and each element has a unique id. In the sample template we've included a `name` field, but this is only for convenience. It's ignored by the server, and can optionally be left out.
 
 Each field needs an `element_id`, `value`, and `group_id`. The `group_id` is used to make sure all fields are grouped into the same record. (For example, that the carrier, death benefit, and PDF document all belong to the same 'policy' record). The `group_id` must be an array of 2 unique UUIDs. For the sake of this walk-through, it's not important to fully understand how grouping works, you can feel free to include the literal values supplied in the sample template below.
 
-
-Post the following URL with the following headers. Be sure to include the JSON template as the body.
-
-
-* URL: POST https://my.everplans.com/api/v2/everplan-responses/[everplan_id]
-* Request body:
-Be sure to supply the correct eveplan ID and the correct ID for the uploaded file (from the previous API request).
-
-
-```
+```shell
 {
   "data": {
     "type": "everplan-responses",
@@ -179,8 +167,19 @@ Be sure to supply the correct eveplan ID and the correct ID for the uploaded fil
 }
 ```
 
+
+Post the following URL with the following headers. Be sure to include the JSON template as the body.
+
+
+* URL: POST https://my.everplans.com/api/v2/everplan-responses/[everplan_id]
+* Request body:
+Be sure to supply the correct eveplan ID and the correct ID for the uploaded file (from the previous API request).
+
+
+
+
+``` shell
 For convenience, here is a cURL command:
-```
 curl -X PATCH \
   https://my.everplans.com/api/v2/everplan-responses/[everplan_id] \
   -H 'Authorization: Token token=BJ1qQiwpgJm07xAM1cOvw4Q7KgewIR9x8ePb5_NmDOY' \
