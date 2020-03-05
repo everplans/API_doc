@@ -11,9 +11,9 @@ To get an API Secret and a client ID, please reach out to the Everplans Customer
 
 
 ## Refresh token
-You need the API secret key and the client ID to retrieve a refresh_token which you'll use to get an access_token
+You need the API secret key and the client ID to retrieve a `refresh_token` which you'll use to get an access_token
 
-> To retrieve an refresh_token, use this code:
+> To retrieve a `refresh_token`, use this code:
 
 ```shell
 # With shell, you can just pass the correct header with each request
@@ -36,7 +36,7 @@ curl "http://everplans.com/api/v2/oauth2/refresh_token" \
 ```
 
 
-To retrieve an refresh_token, use
+To retrieve a `refresh_token`, use
 
 ### HTTP Request
 
@@ -53,11 +53,11 @@ client_secret | your API secret key.
 You must replace <code>client_id</code> and <code>secret</code> with your personal API keys.
 </aside>
 <aside class="success">
-once you get a refresh_token back, you can then use it to retrieve your access_token
+once you get a <code>refresh_token</code> back, you can then use it to retrieve your <code>access_token</code>
 </aside>
 
 
-> To retrieve the access_token, use:
+> To retrieve the `access_token`, use:
 
 ```shell
 # With shell, you can just pass the correct header with each request
@@ -67,7 +67,7 @@ curl "http://everplans.com/api/v2/oauth2/access_token" \
   }'
 ```
 
-> Make sure to replace `refresh_token` with the refresh_token you got in the previous step.
+> Make sure to replace `refresh_token` with the `refresh_token` you got in the previous step.
 > The above command returns JSON structured like this:
 
 ```json
@@ -79,7 +79,7 @@ curl "http://everplans.com/api/v2/oauth2/access_token" \
 ```
 
 
-To retrieve an access_token, use
+To retrieve an `access_token`, use
 
 ### HTTP Request
 
@@ -95,7 +95,7 @@ refresh_token | Your refresh token.
 You must replace <code>refresh_token</code> with the token you got in the previous step.
 </aside>
 <aside class="success">
-once you get an access_token back, you're authenticated
+once you get an <code>access_token</code> back, you're authenticated
 </aside>
 
 Everplans expects for the `access_token` to be included in all API requests to the server in an Authorization header that looks like the following:

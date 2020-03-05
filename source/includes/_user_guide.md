@@ -12,7 +12,7 @@ This walk-through will take you through authenticating with the API, and posting
 
 
 ## Authenticating
-We assume you've gotten an access token by following the steps [here](#authentication).
+We assume you've gotten an `access_token` by following the steps [here](#authentication).
 
 Sessions are only valid for 10 minutes after last use.
 
