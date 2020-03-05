@@ -147,7 +147,7 @@ Each field needs an `element_id`, `value`, and `group_id`. The `group_id` is use
           ],
           "name": "Name of insurance company",
           "element-id": "f7d54148-1d9c-4556-b8fc-4c1deadeda71",
-          "value": "M Financial"
+          "value": "OIM Test Insurance"
         },
         {
           "group-id": [
@@ -273,7 +273,7 @@ curl -X PATCH \
           ],
           "name": "Name of insurance company",
           "element-id": "f7d54148-1d9c-4556-b8fc-4c1deadeda71",
-          "value": "M Financial"
+          "value": "OIM Test Insurance"
         },
         {
           "group-id": [

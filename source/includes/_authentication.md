@@ -11,7 +11,8 @@ To get an API Secret and a client ID, please reach out to the **Everplans Custom
 
 
 ## Refresh token
-You need the API secret key and the client ID to retrieve a `refresh_token` which you'll use to get an access_token
+You need the API secret key and the client ID to retrieve a `refresh_token` which you'll use to get an access_token.
+The `refresh_token` never expires
 
 > To retrieve a `refresh_token`, use this code:
 
@@ -51,6 +52,9 @@ client_secret | your API secret key.
 
 <aside class="notice">
 You must replace <code>client_id</code> and <code>secret</code> with your personal API keys.
+</aside>
+<aside class="notice">
+The <code>refresh_token</code> never expires but we invalidate it when another <code>refresh_token</code> is generated
 </aside>
 <aside class="success">
 once you get a <code>refresh_token</code> back, you can then use it to retrieve your <code>access_token</code>
@@ -93,6 +97,9 @@ refresh_token | Your refresh token.
 
 <aside class="notice">
 You must replace <code>refresh_token</code> with the token you got in the previous step.
+</aside>
+<aside class="notice">
+The <code>access_token</code> expires 10 mins after last use
 </aside>
 <aside class="success">
 once you get an <code>access_token</code> back, you're authenticated
