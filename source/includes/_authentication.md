@@ -1,13 +1,13 @@
 # Authentication
 To successfully authenticate, you need
 - an API Secret Key and client ID
-- a user refresh_token
-- an access_token
+- a user `refresh_token`
+- an `access_token`
 
-All call to our endpoint unless specified require an access_token
+All calls to our endpoint unless specified require an `access_token`
 
 ## API Secret
-To get an API Secret and a client ID, please reach out to the Everplans Customer Success team
+To get an API Secret and a client ID, please reach out to the **Everplans Customer Success** team
 
 
 ## Refresh token
