@@ -23,10 +23,16 @@ Sessions are only valid for 10 minutes after last use.
 Once you've logged in, and gotten a valid `session_token` and `everplan_id`, you can use the following 2 API endpoints to upload files and metadata respectively.
 
 ### Headers
-
 For all subsequent API requests you'll need to set the following two headers.
-* `Content-Type: application/vnd.api+json`
-* `'Authorization: Token token=access_token' ` (be sure to supply the exact access_token you received from the Authentication request)
+
+Header | Value
+--------- | -----------
+Content-Type | application/vnd.api+json
+Authorization | Token token=access_token
+
+<aside class="notice">
+  Be sure to supply the exact <code>access_token</code> you received from the Authentication request
+</aside>
 
 ```shell
 For convenience, here is a cURL command:
@@ -61,8 +67,28 @@ curl -X POST \
 ### Uploading the PDF
 Post the following URL with the following headers. Be sure to include the PDF as a binary attachment in the post payload.
 
-* URL: POST  https://my.everplans.com/api/v2/uploads
-* Additional header: `Content-Type: multipart/form-data`
+
+### HTTP Request
+
+`POST  https://my.everplans.com/api/v2/uploads`
+
+
+### Headers
+
+Header | Value
+--------- | -----------
+Content-Type | multipart/form-data
+Authorization | Token token=access_token
+
+### API Parameters
+
+Parameter | Description
+--------- | -----------
+upload | a json of the upload you want to add in the format above.
+
+<aside class="notice">
+  <code>upload</code> must be in the format shown in the example shown to the right.
+</aside>
 
 
 ### Attaching the PDF and adding meta data
@@ -70,7 +96,11 @@ The everplan is comprised of structured fields in a rich hierarchy. Each `field`
 
 Each field needs an `element_id`, `value`, and `group_id`. The `group_id` is used to make sure all fields are grouped into the same record. (For example, that the carrier, death benefit, and PDF document all belong to the same 'policy' record). The `group_id` must be an array of 2 unique UUIDs. For the sake of this walk-through, it's not important to fully understand how grouping works, you can feel free to include the literal values supplied in the sample template below.
 
-```shell
+
+``` shell
+================================
+  data payload format example
+================================
 {
   "data": {
     "type": "everplan-responses",
@@ -166,19 +196,31 @@ Each field needs an `element_id`, `value`, and `group_id`. The `group_id` is use
   }
 }
 ```
+To attach the PDF and add the metadata, use
 
+### HTTP Request
 
-Post the following URL with the following headers. Be sure to include the JSON template as the body.
+`PATCH https://my.everplans.com/api/v2/everplan-responses/[everplan_id]`
 
+### API Parameters
 
-* URL: POST https://my.everplans.com/api/v2/everplan-responses/[everplan_id]
-* Request body:
-Be sure to supply the correct eveplan ID and the correct ID for the uploaded file (from the previous API request).
+Parameter | Description
+--------- | -----------
+data | a json of the responses you want to add.
 
+<aside class="notice">
+  <code>data</code> must be in the format shown in the example shown to the right.
+</aside>
+<aside class="notice">
+  Be sure to supply the correct <code>everplan ID</code> and the correct <code>ID for the uploaded file</code> (from the previous API request)
+</aside>
 
 
 
 ``` shell
+================================
+Request Example
+================================
 For convenience, here is a cURL command:
 curl -X PATCH \
   https://my.everplans.com/api/v2/everplan-responses/[everplan_id] \
@@ -280,3 +322,19 @@ curl -X PATCH \
   }
 }'
 ```
+
+<!-- To attach the PDF and add the metadata, use
+
+### HTTP Request
+
+`PATCH https://my.everplans.com/api/v2/everplan-responses/[everplan_id]`
+
+### API Parameters
+
+Parameter | Description
+--------- | -----------
+data | a json of the responses you want to add.
+
+<aside class="notice">
+  <code>data</code> must be in the format shown in the example.
+</aside> -->
